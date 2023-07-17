@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<html>
+    <body>
+        <div>
+            <table border="1">
+            <thead>
+                <tr>
+                    <th>Nombre </th>
+                    <th>Imagen</th>
+                    <th>Categoría </th>
+                    <th>SubCategoría</th>
+                    <th>Precio </th>
+                    <th>Stock </th>
+                    <th>Digital </th>
+                    <th>Descripción </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for productos in object_list  %}
+                <tr>
+                    <td>{{ productos.nombre }}</td>
+                    <td><img class="card-img-top thumbnail" src="{{ producto.image.url }}" alt=""></td>
+                    <td>{{ productos.nombre_categoria }}</td>
+                    <td>{{ productos.nombre_subcategoria }}</td>        
+                    <td>{{ productos.precio }}</td>
+                    <td>{{ productos.stock }}</td>
+                    <td>{{ productos.digital }}</td>
+                    <td>{{ productos.descripcion }}</td>
+                    
+                
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </body>
+</html>
+    
+{% endblock contenido %}

@@ -1,0 +1,22 @@
+
+[project]
+name = "UltimaPrueba"
+version = "0.2.0"
+description = "Ultima Prueba de Django, super copada."
+authors = [
+    {name = "Mariano Quiroga", email = "losquirogamir@gmail.com"},
+]
+dependencies = [
+    "Django>=4.2.3",
+    "djlint>=1.31.1",
+    "Pyton>=0.1.4",
+    "Pillow>=10.0.0",
+    "kolo>=2.12.3",
+]
+requires-python = ">=3.11"
+readme = "readme"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"

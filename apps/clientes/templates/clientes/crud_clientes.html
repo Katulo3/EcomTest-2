@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% block contenido %}
+<html>
+    <title>Clientes</title>
+    <body>
+        
+        <div class="container">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit"  value="Aceptar">
+            </form>
+        </div>
+    </body>
+</html>
+{% endblock contenido %}

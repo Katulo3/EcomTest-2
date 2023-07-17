@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+    <html>
+        <body>
+            
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>>
+                <th>Email </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in object_list  %}
+            <tr>
+                <td>{{ cliente.user }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.apellido }} </td>
+                <td>{{ cliente.email }}</td>
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <ul>
+            <li>
+                Menú crud:
+                <p>Da conflicto con las urls de la app cliente. So, no puedo poner botones</p> 
+                
+               
+            </li>
+        </ul>
+    
+</div>
+</body>
+</html> 
+{% endblock contenido %}
