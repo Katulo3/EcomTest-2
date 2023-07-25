@@ -1,0 +1,95 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<html>
+    <body>
+        
+    <style>
+        .button-style {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #fff; /* Text color */
+        background-color: #ff9900; /* Button background color */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+        }
+
+        .button-style:hover {
+        background-color: #ffcc33; /* Button background color on hover */
+        }
+
+        .button-style:active {
+        background-color: #ff6600; /* Button background color when clicked */
+        }
+
+    </style>
+
+<script>
+    function confirmarEliminacion(event) {
+    if (confirm("¿Estás MUY seguro de que deseas eliminar esto?")) {
+        
+        // Redirect to a different URL after deleting the product
+        window.location.href = "{% url 'index' %}";
+    } else {
+        event.preventDefault();
+        return false;
+    }
+    }
+
+</script>
+        <h3 style="color: red">ATENCION. Al borrar una categoría, usted también eliminará todas las subcategorias asociadas a la misma. </h3>
+        <div class="card">
+    <ul>
+        {% for categoria in categorias %}
+        <li>
+            <strong>Categoría:</strong>
+            <a href="{% url 'productos:editar_categoria' pk=categoria.id %}" class="button-style">
+            <span>{{ categoria.categoria_name }}</span>
+            </a>
+            <a href="{% url 'productos:eliminar_categoria' pk=categoria.id %}" class="btn btn-danger" onclick="return confirmarEliminacion(event)">Eliminar</a>
+            
+            <ul>
+                {% for sub_categoria in sub_categorias %}
+                {% if sub_categoria.categoria == categoria %}
+                    <li>
+                        <a href="{% url 'productos:eliminar_subcategoria' pk=sub_categoria.id %}" class="btn btn-danger" onclick="return confirmarEliminacion(event)">Eliminar</a>
+                        <a href="{% url 'productos:editar_subcategoria' pk=sub_categoria.id %}" class="btn btn-info">{{ sub_categoria }}</a>
+
+                    </li>
+                {% endif %}
+                
+            {% endfor %}
+            <hr>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+    .card {
+        border: 1px solid #000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+        font-size: 20px;
+    }
+    
+</style>
+
+
+        
+    </body>
+</html>
+    
+{% endblock contenido %}

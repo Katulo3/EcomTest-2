@@ -1,8 +1,95 @@
 {% extends "core/base.html" %}
 
 {% block contenido %}
-<html>
+<!DOCTYPE html>
+<html lang="es-ar">
+
+<script src="https://unpkg.com/htmx.org@latest/dist/htmx.js"></script>
+
     <body>
+<style>
+        .thumbnail {
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+                }
+        .messages {
+
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb; 
+            border-radius: 5px; 
+            padding: 10px; 
+            margin: 10px auto; 
+            max-width: 500px; 
+        }
+        .button {
+        display: inline-block;
+        
+        background-color: #f1f1f1;
+        color: #000;
+        border-radius: 4px;
+        text-decoration: none;
+        border: none;
+        }
+
+        .button-blue {
+        background-color: #3498db;
+        padding: 4px 10px;
+        color: #ffffff;
+        }
+
+        .button-red {
+        background-color: #e74c3c;
+        padding: 8px 16px;
+        color: #fff;
+        }
+</style>
+
+<script>
+function confirmarEliminacion(event) {
+  if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+    var url = "{% url 'productos:productos'  %}";
+
+    // Redirect to a different URL after deleting the product
+    window.location.href = "{% url 'productos:productos' %}";
+  } else {
+    event.preventDefault();
+    return false;
+  }
+}
+
+</script>
+
+        <div class="search">
+            <form action="{% url 'productos:productos' %}" method="get">
+                <input type="text" name="buscar" placeholder="Buscar por nombre...">
+                <button type="submit">Buscar</button>
+               
+            </form>
+        </div>
+        <hr>
+        <form >
+        <div>
+            <!-- Ordenar por nombre? -->
+            <!-- <select id="sortCriteria">
+                <option value="nombre">Nombre</option>
+                <option value="categoria">Categoría</option>
+                <option value="subcategoria">SubCategoría</option>
+                <option value="precio">Precio</option>
+            </select> -->
+
+        <button type="submit">Ver todos los productos</button>
+        </form>
+        </div>
+         
+        <div >
+        {% for message in messages %}
+            <p class="messages">{{ message }}</p>
+        {% endfor %}
+        </div>
         <div>
             <table border="1">
             <thead>
@@ -14,28 +101,43 @@
                     <th>Precio </th>
                     <th>Stock </th>
                     <th>Digital </th>
+                    <th>Acciones</th>
                     <th>Descripción </th>
                 </tr>
             </thead>
-            <tbody>
-                {% for productos in object_list  %}
+            <tbody id="tableBody">
+                {% for productos in object_list %}
                 <tr>
-                    <td>{{ productos.nombre }}</td>
-                    <td><img class="card-img-top thumbnail" src="{{ producto.image.url }}" alt=""></td>
+                    
+                    
+                    <td><p>{{ productos.nombre }}</p></td>
+                    <!-- podría usar el thumbnail de image kit, pero ANITALIAS de PIL da error, ver después. -->
+                    <td><img class="card-img-top thumbnail" src="{{ productos.image.url }}" alt="Imagen"></td>
                     <td>{{ productos.nombre_categoria }}</td>
                     <td>{{ productos.nombre_subcategoria }}</td>        
                     <td>{{ productos.precio }}</td>
                     <td>{{ productos.stock }}</td>
-                    <td>{{ productos.digital }}</td>
+                    <td>
+                    {% if productos.digital == True %}
+                    <p>Sí</p>        
+                    {% else %}
+                    <p>No</p>
+                    {% endif %}
+                    </td>
+                    <td><button class="button button-blue">
+                        <a href="{% url 'productos:editar_producto' pk=productos.id %}" class="button button-blue">Editar</a></button>
+                        <a href="{% url 'productos:eliminar_producto' pk=productos.id %}" class="button button-red" onclick="return confirmarEliminacion(event)">Eliminar</a>
+                    </td>
                     <td>{{ productos.descripcion }}</td>
-                    
-                
+
+
                 </tr>
                 {% endfor %}
             </tbody>
             </table>
         </div>
     </body>
+
 </html>
     
 {% endblock contenido %}

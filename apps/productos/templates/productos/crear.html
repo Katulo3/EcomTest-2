@@ -1,16 +1,67 @@
 {% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
 {% block contenido %}
-<html>
-    <title>Productos</title>
+<html lang="es-ar">
+
+
     <body>
-        <h1>Productos nuevos</h1>
+        <h1 id="editar_categoria-heading" style="display: none;">Editar Categoria: {{ categorias }}</h1>
+        <h1 id="categoria-heading" style="display: none;">Nueva categoria </h1>
+
+        <h1 id="update-subcategoria-heading" style="display: none;">Editar Subcategoria: {{ sub_categoria }} </h1>
+        <h1 id="subcategoria-heading" style="display: none;">Nueva Subcategoria </h1>
+        
+        <h1 id="crear_producto-heading" style="display: none;">Nuevo producto </h1>
+        <h1 id="editar_producto-heading" style="display: none;">Editar producto: {{ productos.nombre }} </h1>
+
+<script type="text/javascript">
+    
+    const currentUrl = window.location.href;
+    //Cambia el título según url
+    //categorias y subcategorias
+    if (currentUrl.includes("productos/crear/categorias")) {
+        document.getElementById("categoria-heading").style.display = "block";
+
+    } else if (currentUrl.includes("productos/crear/sub_categorias")) {
+        document.getElementById("subcategoria-heading").style.display = "block";
+        
+    } else if (currentUrl.includes("/productos/crear/editar_categorias/")) {
+        document.getElementById("editar_categoria-heading").style.display = "block";
+        //productos
+    } else if (currentUrl.includes( "/productos/crear/editar_subcategorias/")) {
+        document.getElementById("update-subcategoria-heading").style.display = "block";
+        
+        
+
+    } else if (currentUrl.includes("/productos/productos/editar_producto/")) {
+        document.getElementById("editar_producto-heading").style.display = "block";
+        
+    } else {
+       
+        document.getElementById("crear_producto-heading").style.display = "block";
+    }
+
+    
+    
+
+</script>
+
         <div class="container">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit"  value="Aceptar">
+                {{ form|crispy }}
+                <input type="submit" value="Guardar">
+                
+                {% if form.instance.imagen_thumbnail %}
+                    <img src="{{ form.instance.imagen_thumbnail.url }}" alt="Imagen miniatura">
+                {% endif %}
+                <script>
+                    
+                </script>
             </form>
         </div>
     </body>
 </html>
+
 {% endblock contenido %}
