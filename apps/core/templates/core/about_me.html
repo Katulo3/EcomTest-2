@@ -1,17 +1,87 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
+{% load static %}
 {% block contenido %}
-<html>
-    <title>Clientes</title>
-    <body>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <style>
+            .container {
+                color: black;
+                text-align: center;
+            }
+            body {
+                background-color: #ffffff;
+                margin: 0;
+            }
+            .box {
+                margin-bottom: 20px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .box h1 {
+                font-size: 36px;
+                font-weight: bold;
+            }
+
+            .box img {
+                height: 600px;
+                width: 550px;
+            }
+
+            .box p {
+                font-size: 20px;
+            }
+            .info {
+                margin-bottom: 20px;
+                font-size: 20px;
+            }
         
-        <div>
-            <h1>Este es el about me</h1>
+</style>
 
-            <p>Texto muy largo y muy copado acerca de nosotros</p>
+        <title>info</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Ecommerce y BussinesManager</h1>
 
-            <h2>Nuestro rubro y laburo</h2>
-            <p>Larga trayectoria en el rubro de plantillas de ejemplo.</p>
+            <h2>Administrar tu negocio nunca fue tan elegante y fácil</h2>
+            <div class="image">
+                {% for about_me in object_list %}
+                    <div class="box">
+                        <h1>{{ about_me.titulo }}</h1>
+                        <img src="{{ about_me.image.url }}" alt="La imagen no se puede cargar.">
+                        <p>{{ about_me.texto_presentacion }}</p>
+                    </div>
+                {% empty %}
+                <h2>Nuestro rubro y laburo</h2>
+                <p>Larga trayectoria en el rubro de plantillas de ejemplo.</p>
+                {% endfor %}
+            </div>
+            
+        </div>
+        <!-- Esto podrái cambiarlo en el about me -->
+        
+        <div class="info" style="text-align: center;">
+            
+                <h3>Contactanos</h3>
+                
+                <p>Email: MúsculusOfficial@gmail.com</p>
+                
+                <p>Celular / Whatsapp: + 54 9 261 599 6781 (Pablo) </p>
+                <p>Celular / Whatsapp: + 54 9 261 322 3774 (Juan) </p>
+             
+        </div>
+        <div class="info" style="text-align: center;">
+            
+                <h3>Horarios</h3>
+                
+                <p>De lunes a viernes: de 8:30hs - 21:30hs</p>
+                
+                <p>Sábados: de 8:30hs - 13:30hs   </p>
+             
         </div>
     </body>
 </html>
 {% endblock contenido %}
+

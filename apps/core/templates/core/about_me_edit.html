@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .container {
+                color: black;
+                text-align: center;
+            }
+            body {
+                background-color: #ffffff;
+                margin: 0;
+            }
+        </style>
+        <title>info</title>
+    </head>
+    <body>
+        
+        <h1>Editar About Me</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Guardar">
+            {{form.errors}}
+        </form>
+        
+    </body>
+</html>
+{% endblock contenido %}

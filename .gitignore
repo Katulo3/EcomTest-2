@@ -5,8 +5,9 @@ UPrueba-env
 
 db.sqlite3
 configdb.sqlite3
-
-
+# static stuff
+images
+static
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

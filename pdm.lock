@@ -6,7 +6,7 @@ groups = ["default"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:4a742638ee34cdf6108a9fc2a93c5017c07ad25bd18311503758651f9f80c4b4"
+content_hash = "sha256:c2992aa6a9f3e52dcc38cd62498297ae78d99bb3b5de95cc6fc640fcca5dd795"
 
 [[package]]
 name = "aiohttp"
@@ -579,6 +579,46 @@ files = [
 ]
 
 [[package]]
+name = "django-appconf"
+version = "1.0.5"
+requires_python = ">=3.6"
+summary = "A helper class for handling configuration defaults of packaged apps gracefully."
+dependencies = [
+    "django",
+]
+files = [
+    {file = "django-appconf-1.0.5.tar.gz", hash = "sha256:be3db0be6c81fa84742000b89a81c016d70ae66a7ccb620cdef592b1f1a6aaa4"},
+    {file = "django_appconf-1.0.5-py3-none-any.whl", hash = "sha256:ae9f864ee1958c815a965ed63b3fba4874eec13de10236ba063a788f9a17389d"},
+]
+
+[[package]]
+name = "django-crispy-forms"
+version = "2.0"
+requires_python = ">=3.7"
+summary = "Best way to have Django DRY forms"
+dependencies = [
+    "django>=3.2",
+]
+files = [
+    {file = "django-crispy-forms-2.0.tar.gz", hash = "sha256:90193b068bf948d9c68449bc8260afed1a8e2afe11ee0bac8c4ebfaeb175b322"},
+    {file = "django_crispy_forms-2.0-py3-none-any.whl", hash = "sha256:d1d4e585929058a9ab3b797666ea5b69320b9ba7937f9d146d32173246a6fd13"},
+]
+
+[[package]]
+name = "django-imagekit"
+version = "4.1.0"
+summary = "Automated image processing for Django models."
+dependencies = [
+    "django-appconf; python_version > \"3\"",
+    "pilkit>=0.2.0",
+    "six",
+]
+files = [
+    {file = "django-imagekit-4.1.0.tar.gz", hash = "sha256:e559aeaae43a33b34f87631a9fa5696455e4451ffa738a42635fde442fedac5c"},
+    {file = "django_imagekit-4.1.0-py2.py3-none-any.whl", hash = "sha256:87e36f8dc1d8745647881f4366ef4965225f048042dacebbee0dcb87425defef"},
+]
+
+[[package]]
 name = "djlint"
 version = "1.31.1"
 requires_python = ">=3.8.0,<4.0.0"
@@ -897,6 +937,14 @@ summary = "Utility library for gitignore style pattern matching of file paths."
 files = [
     {file = "pathspec-0.11.1-py3-none-any.whl", hash = "sha256:d8af70af76652554bd134c22b3e8a1cc46ed7d91edcdd721ef1a0c51a84a5293"},
     {file = "pathspec-0.11.1.tar.gz", hash = "sha256:2798de800fa92780e33acca925945e9a19a133b715067cf165b8866c15a31687"},
+]
+
+[[package]]
+name = "pilkit"
+version = "2.0"
+summary = "A collection of utilities and processors for the Python Imaging Libary."
+files = [
+    {file = "pilkit-2.0.tar.gz", hash = "sha256:ddb30c2f0198a147e56b151476c3bb9fe045fbfd5b0a0fa2a3148dba62d1559f"},
 ]
 
 [[package]]

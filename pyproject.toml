@@ -12,6 +12,8 @@ dependencies = [
     "Pyton>=0.1.4",
     "Pillow>=10.0.0",
     "kolo>=2.12.3",
+    "django-imagekit>=4.1.0",
+    "django-crispy-forms>=2.0",
 ]
 requires-python = ">=3.11"
 readme = "readme"

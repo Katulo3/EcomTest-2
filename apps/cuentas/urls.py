@@ -13,4 +13,8 @@ urlpatterns = [
     # # Users
     path("usuarios/", views.VerUsuarios.as_view(), name="usuarios"),
     path("registrar/", views.registrar_usuarios, name="registrar_usuarios"),
+    path("login/", views.login_usuario, name="login"),
+    path("logout/", views.logout_usuario, name="logout"),
+    path("perfil/", views.perfil, name="perfil"),
+    path("crear/editar_perfil/<pk>", views.EditarPerfil.as_view(), name="editar_perfil"),
 ]

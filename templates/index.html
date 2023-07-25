@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    
+
     <title>Ecom</title>
 </head>
 <body>
+<style>
+        .message-box {
+                background-color: green;
+                color: white;
+                padding: 10px;
+                margin-bottom: 10px;
+                margin-left: 450px;
+                margin-right: 450px;
+                border-radius: 5px;
+            }
+        .message-box.success {
+                background-color: green;
+            }
+
+        .menu-button {
+            background-color: #3498db; /* Azul */
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            width: 200px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .productos {
+    background-color: #9b59b6; /* Púrpura */
+        }
+        .agregar-producto {
+            background-color: #2ecc71; /* Verde */
+        }
+        .agregar-categoria {
+            background-color: #f1c40f; /* Amarillo */
+        }
+        .agregar-subcategoria {
+            background-color: #e67e22; /* Naranja */
+        }
+        .categorias-subcategorias {
+            background-color: #e74c3c; /* Rojo */
+        }
+        .ventas {
+            background-color: #1abc9c; /* Turquesa */
+        }
+</style>
     {% include 'core/navbar.html' %}
 
     {% block contenido %}
@@ -16,13 +64,49 @@
         <div style="text-align: center">
         <h1 style= "color: red"> nashe (●'◡'●)</h1> 
 
-        <h2>⌛ Este template fue abierto el  {{ fecha_hora }}</h2>
     </div>
-
+    <div style="text-align: center">
     
+        <h1>Admin panel</h1>
+
+            <div>
+                <h2>Mi negocio</h2>
+                <p>
+                    <a href="{% url 'cuentas:usuarios' %}" class="menu-button usuarios">Usuarios</a>
+                </p>
+                <p>
+                    <a href="{% url 'productos:productos' %}" class="menu-button productos">Productos</a>
+                </p>
+                <p>
+                    <a href="productos/crear" class="menu-button agregar-producto">Agregar nuevo producto</a>
+                </p>
+                <p>
+                    <a href="productos/crear/categorias" class="menu-button agregar-categoria">Agregar nueva categoría</a>
+                </p>
+                <p>
+                    <a href="productos/crear/sub_categorias" class="menu-button agregar-subcategoria">Agregar nueva SUBcategoría</a>
+                </p>
+                <p>
+                    <a href="productos/sub_categorias" class="menu-button categorias-subcategorias">Ver categorias y subcategorias</a>
+                </p>
+                <p>
+                    <a href="{% url 'ventas:ventas' %}" class="menu-button ventas">Ventas</a>
+                </p>
+            
+            {% for messages in messages %}
+            <div class="message-box success">
+                <h3>{{ messages }}</h3>
+            </div>
+            {% endfor %}
+             </div>
+    </div>
+    <div style="text-align: center">
+    <h2>Bienvenido/a {{ user }}!!</h2>
+    <p>Bussines Manager es una web para gestionar su comercio. Posee una tienda virtual de productos para realizar ventas</p>
+    <p>Hermano, como odio el frontend, ayuda. Usted podrá gestionar sus ventas en la tienda virtual</p>
+    </div>
     {% endblock contenido %}
 
     {% include 'core/footer.html' %}
     </body>
-
 </html>

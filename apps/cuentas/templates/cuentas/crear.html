@@ -1,10 +1,15 @@
 {% extends 'core/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block contenido %}
 <html>
-    <title>Clientes</title>
+    
     <body>
-        
+        <h1 id="editar_perfil-heading" style="text-align: center">Editar Perfil</h1>
+        <a class="btn btn-warning" href= "{% url 'cuentas:perfil' %}" style="text-align: center"> &#8592; Volver al Perfil</a>
+        <script>
+
+    </script>
         <div class="container">
             <form action="" method="post">
                 {% csrf_token %}

@@ -1,9 +1,24 @@
+#  * Apps
+from email import message
+
 from cuentas.forms import CreateUserForm, UserCreationForm
+
+# * django contrib
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+
+# * django views
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
-from django.views.generic.edit import CreateView, UpdateView
+
+from apps.cuentas.forms import EditUserForm
+
+# * django imports
+
 
 # Mostrar clientísimos
 # class ListClientes(ListView):
@@ -59,12 +74,60 @@ class VerUsuarios(ListView):
 
 
 def registrar_usuarios(request):
-    form = CreateUserForm()
+    # Evita que el usuario navege en registrar y login si ya ingresó
+    if request.user.is_authenticated:
+        return redirect("index")
+    else:
+        form = CreateUserForm()
 
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("cuentas:usuarios")
-    contexto = {"form": form}
-    return render(request, "cuentas/registrar.html", contexto)
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                # Ver mensaje
+                user = form.cleaned_data.get("username")
+                messages.success(request, f"Usuario creado exitosamente:{user}")
+                return redirect("cuentas:login")
+
+        contexto = {"form": form}
+        return render(request, "cuentas/registrar.html", contexto)
+
+
+def login_usuario(request):
+    # Evita que el usuario navege en registrar y login si ya ingresó
+    if request.user.is_authenticated:
+        return redirect("index")
+    else:
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("index")
+            else:
+                messages.error(request, "Usuario o contraseña incorrectos")
+        contexto = {}
+        return render(request, "cuentas/login.html", contexto)
+
+
+@login_required(login_url="cuentas:login")
+def logout_usuario(request):
+    logout(request)
+    return redirect("index")
+
+
+@login_required(login_url="cuentas:login")
+def perfil(request):
+    contexto = {}
+    user = User.objects.all()
+    contexto["user"] = user
+    return render(request, "perfil.html", contexto)
+
+
+class EditarPerfil(UpdateView):
+    template_name = "cuentas/crear.html"
+    model = User
+    form_class = EditUserForm
+
+    success_url = reverse_lazy("cuentas:login")
