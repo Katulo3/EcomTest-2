@@ -30,16 +30,6 @@ Categorías muy simples y generales. Se pueden crear desde el lado de front. Pro
 ### Artículos sofisticados: 
 Categorías más complejas(se recomienda un diagrama), con subcategorías compuestas. Como debería ser un Ecom, creo yo.
 
-## Clientes
-Creo que el nombre correcto hubiera sido Usuarios pero ya no es relevante.
-
-Se debe ver el concepto de vendedor como de staff o administrador(no superuser).
-
-Admin podrá gestionar los vendedores.
-Los vendedores podrán administrar sus clientes. Incluirá vincular la cuenta a un usuario.
-
-Por ejemplo, Cuenta: Juan. Puede ser o un cliente o un admin. Cada uno con sus permisos.
-
 ## Ventas
 
 ### Módulo de ventas y negocio
